@@ -1,16 +1,5 @@
 public class ChangeMaker{
   public static void main(String[] args){
-    // ChangeMaker.main(new String[]{"9", "1", "4", "12"}) --> test
-    // if (args.length ==0){
-    //   throw(new IllegalArgumentException("Must have at least one coin and one amount"));
-    // }
-    // else{
-    //   for(int i=0; i<args.length; i++){
-    //     if (args[i]<0){
-    //       throw(new IllegalArgumentException("Cannot have a negative coin or amount"));
-    //     }
-    //   }
-    // }
     try{
       for(int i=0; i<args.length; i++){
         Integer.parseInt(args[i]);
