@@ -4,6 +4,7 @@ public class BigInteger{
   public static final BigInteger ZERO = new BigInteger("0");
   public static final BigInteger ONE = new BigInteger("1");
 
+  //test suite for big integer
   public static void main(String[] args){
     testIsNegative();
     testToString();
@@ -18,6 +19,7 @@ public class BigInteger{
     testRemainder();
   }
 
+  //big integer constructor
   public BigInteger(String val){
     this.val = val;
     if (this.val.substring(0,1).equals("-")){
@@ -28,14 +30,17 @@ public class BigInteger{
     }
   }
 
+  //returns true if the big integer is negative and false if it is positive
   public boolean isNegative(){
     return this.negative;
   }
 
+  //returns the big integer as a string
   public String toString(){
     return this.val;
   }
 
+  //returns true if two big integers are equal and false if they are not equal
   public boolean equals(Object x){
     if (!(x instanceof BigInteger)){
       return false;
@@ -44,6 +49,7 @@ public class BigInteger{
     return ((obj.val).equals(this.val));
   }
 
+  //returns the absolute value of the big integer
   public BigInteger absoluteValue(){
     if (this.isNegative() == false){
       return new BigInteger(this.val);
@@ -53,6 +59,7 @@ public class BigInteger{
     }
   }
 
+  //finds the bigger big integer of two big integers and returns the bigger one
   public BigInteger compareTo(BigInteger val){
     String bigInt1 = this.val.toString();
     String bigInt2 = val.toString();
@@ -78,6 +85,8 @@ public class BigInteger{
     }
     return new BigInteger("0");
   }
+
+  //reverses an array
   public int[] reverse(int[] x){
     int[] result = new int[x.length];
     int count = 0;
@@ -87,6 +96,8 @@ public class BigInteger{
     }
     return result;
   }
+
+  //add method for big integer class
   public BigInteger add ( BigInteger val ){
     String bigInt1 = this.val.toString();
     String bigInt2 = val.toString();
@@ -101,10 +112,12 @@ public class BigInteger{
       bigInt1 = bigInt1.substring(1,bigInt1.length());
       bigInt2 = bigInt2.substring(1,bigInt2.length());
     }
+
     //if bigInt1 is negative and bigInt2 is positive
     if (this.isNegative() && !(val.isNegative())){
       return (val.subtract(this.absoluteValue()));
     }
+
     //if bigInt2 is negative and bigInt1 is positive
     if (!(this.isNegative()) && val.isNegative()){
       return(this.subtract(val.absoluteValue()));
@@ -138,13 +151,6 @@ public class BigInteger{
         count++;
       }
     }
-    // for (int i=0; i<largerLength; i++){
-    //   System.out.print(topArray[i] + " ");
-    // }
-    // System.out.println();
-    // for (int i=0; i<largerLength; i++){
-    //   System.out.print(bottomArray[i] + " ");
-    // }
     int temp = 0;
     for (int i=largerLength-1; i>=0; i--){
       temp = topArray[i] + bottomArray[i] + carry;
@@ -161,11 +167,15 @@ public class BigInteger{
       }
       carry = temp/10;
     }
+
+    //if both are negative
     if (this.isNegative() && val.isNegative()){
       result = "-" + result;
     }
     return new BigInteger(result);
   }
+
+  //checks numbers in the two arrays being subtracted to make sure the numbers on top are bigger than on bottom
   public boolean checkNumbers(int[] top, int[] bottom){
     for (int i=0; i<top.length; i++){
       if (top[i] < bottom[i]){
@@ -174,6 +184,8 @@ public class BigInteger{
     }
     return true;
   }
+
+  //Subtract method for big integer class
   public BigInteger subtract(BigInteger val){
     String value1 = this.val.toString();
     String value2 = val.toString();
@@ -287,12 +299,11 @@ public class BigInteger{
   if (this.toString().equals(val.toString())){
     differenceStr = Integer.toString(0);
   }
-
-
   BigInteger subtract = new BigInteger(differenceStr);
   return subtract;
 }
 
+//halves a big integer
 public BigInteger half(){
   String bigInt = this.toString();
   String bigInt0 = "0" + bigInt;
@@ -339,10 +350,12 @@ public BigInteger half(){
   return (new BigInteger(result));
 }
 
+//returns true if a big integer is even and false if it is odd
 public boolean isEven(){
   return (Character.getNumericValue(this.toString().charAt(this.toString().length()-1))%2 ==0);
 }
 
+//multiply method for big integer class
 public BigInteger multiply(BigInteger val){
   BigInteger result = new BigInteger("0");
   String bigInt1 = this.toString();
@@ -379,6 +392,8 @@ public BigInteger multiply(BigInteger val){
   }
   return result;
 }
+
+//divide method for big integer class
 public BigInteger divide(BigInteger val){
   BigInteger bigInt1 = this;
   BigInteger bigInt2 = val;
@@ -401,21 +416,20 @@ public BigInteger divide(BigInteger val){
       temp = temp.multiply(ten);
     }
   }
-
   result = result.add(bigInt1.subtract(temp).divide(bigInt2));
-
   if ((this.isNegative() && !val.isNegative()) || (val.isNegative() && !this.isNegative())){
     result = new BigInteger("-" + result.toString());
-
   }
   return result;
 }
 
+//remainder method for big integer class
 public BigInteger remainder(BigInteger val){
   BigInteger bigInt = this;
   return this.subtract(bigInt.divide(val).multiply(val));
 }
 
+//BEGINS TESTS FOR ALL OF THE METHODS
   public static void testIsNegative(){
     System.out.println("TESTING isNegative");
     {
@@ -645,7 +659,6 @@ public BigInteger remainder(BigInteger val){
     {
       BigInteger bigInt1 = new BigInteger("2000");
       BigInteger bigInt2 = new BigInteger("1000");
-      System.out.println(bigInt1.subtract(bigInt2));
       System.out.println(bigInt1.subtract(bigInt2).equals(new BigInteger("1000")));
     }
 
@@ -897,3 +910,4 @@ public BigInteger remainder(BigInteger val){
     }
   }
 }
+
